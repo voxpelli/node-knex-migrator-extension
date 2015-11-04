@@ -46,6 +46,8 @@ function initKnexMigrate(env) {
   var environmentVar = commander.env || process.env.NODE_ENV || 'development';
   var config         = require(env.configPath)[environmentVar];
 
+  process.env.NODE_ENV = environmentVar;
+
   if (!config) {
     console.log(chalk.red('Warning: unable to read knexfile config for environment ' + environmentVar));
     process.exit(1);
