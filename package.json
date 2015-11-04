@@ -1,0 +1,37 @@
+{
+  "name": "knex-migrator-extension",
+  "version": "0.1.0",
+  "description": "An extension of the knex migration tool",
+  "homepage": "http://github.com/voxpelli/node-knex-migrator-extension",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/voxpelli/node-knex-migrator-extension.git"
+  },
+  "author": {
+    "name": "Pelle Wessman",
+    "email": "pelle@kodfabrik.se",
+    "url": "http://kodfabrik.se/"
+  },
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "bin": "./bin/cli.js",
+  "directories": {
+    "lib": "./lib"
+  },
+  "scripts": {
+    "test": "node -e \"require('grunt').tasks(['test']);\"",
+    "test-all": "node -e \"require('grunt').tasks(['test-all']);\"",
+    "prepush": "npm test"
+  },
+  "dependencies": {
+    "bluebird": "^3.0.5",
+    "chalk": "^1.1.1",
+    "commander": "^2.9.0",
+    "interpret": "^0.6.6",
+    "liftoff": "^2.2.0",
+    "minimist": "^1.2.0"
+  },
+  "peerDependencies": {
+    "knex": "^0.7.6"
+  }
+}
