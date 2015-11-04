@@ -84,6 +84,22 @@ function invoke(env) {
     });
 
   commander
+    .command('migrate:install')
+    .description('        Install a fresh version of the schema.')
+    .action(function() {
+      pending = initKnexMigrate(env).install().then(function(results) {
+        var messages = [];
+
+        results.forEach(function (result) {
+          messages.push(chalk.underline(result || 'main'));
+          messages.push(chalk.green('Succeeded'));
+        });
+
+        success(messages.join('\n'));
+      }).catch(exit);
+    });
+
+  commander
     .command('migrate:latest')
     .description('        Run all migrations that have not yet been run.')
     .action(function() {
@@ -91,7 +107,7 @@ function invoke(env) {
         var messages = [];
 
         results.forEach(function (result) {
-          messages.push(chalk.underline(result[2] || 'main') + ' ');
+          messages.push(chalk.underline(result[2] || 'main'));
           if (result[1].length === 0) {
             messages.push(chalk.cyan('Already up to date'));
           }
@@ -110,7 +126,7 @@ function invoke(env) {
         var messages = [];
 
         results.forEach(function (result) {
-          messages.push(chalk.underline(result[2] || 'main') + ' ');
+          messages.push(chalk.underline(result[2] || 'main'));
 
           if (result[1].length === 0) {
             success(chalk.cyan('Already at the base migration'));
