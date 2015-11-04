@@ -1,3 +1,11 @@
+### 0.1.2 (2015-11-04)
+
+
+#### Bug Fixes
+
+* **main:** fixed some broken stuff ([c0aec3c9](http://github.com/voxpelli/node-knex-migrator-extension/commit/c0aec3c9010e31d336fdea618175081201766ba3))
+
+
 ### 0.1.1 (2015-11-04)
 
 
