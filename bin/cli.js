@@ -5,6 +5,7 @@
 var Liftoff   = require('liftoff');
 var interpret = require('interpret');
 var chalk     = require('chalk');
+var tildify   = require('tildify');
 var commander = require('commander');
 var cliPkg    = require('../package');
 var argv      = require('minimist')(process.argv.slice(2));
