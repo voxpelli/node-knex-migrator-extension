@@ -87,11 +87,18 @@ function invoke(env) {
     .command('migrate:latest')
     .description('        Run all migrations that have not yet been run.')
     .action(function() {
-      pending = initKnexMigrate(env).latest().spread(function(batchNo, log) {
-        if (log.length === 0) {
-          success(chalk.cyan('Already up to date'));
-        }
-        success(chalk.green('Batch ' + batchNo + ' run: ' + log.length + ' migrations \n' + chalk.cyan(log.join('\n'))));
+      pending = initKnexMigrate(env).latest().then(function(results) {
+        var messages = [];
+
+        results.forEach(function (result) {
+          messages.push(chalk.underline(result[2] || 'main') + ' ');
+          if (result[1].length === 0) {
+            messages.push(chalk.cyan('Already up to date'));
+          }
+          messages.push(chalk.green('Batch ' + result[0] + ' run: ' + result[1].length + ' migrations \n' + chalk.cyan(result[1].join('\n'))));
+        });
+
+        success(messages.join('\n'));
       }).catch(exit);
     });
 
@@ -99,11 +106,19 @@ function invoke(env) {
     .command('migrate:rollback')
     .description('        Rollback the last set of migrations performed.')
     .action(function() {
-      pending = initKnexMigrate(env).rollback().spread(function(batchNo, log) {
-        if (log.length === 0) {
-          success(chalk.cyan('Already at the base migration'));
-        }
-        success(chalk.green('Batch ' + batchNo + ' rolled back: ' + log.length + ' migrations \n') + chalk.cyan(log.join('\n')));
+      pending = initKnexMigrate(env).rollback().then(function(results) {
+        var messages = [];
+
+        results.forEach(function (result) {
+          messages.push(chalk.underline(result[2] || 'main') + ' ');
+
+          if (result[1].length === 0) {
+            success(chalk.cyan('Already at the base migration'));
+          }
+          success(chalk.green('Batch ' + result[0] + ' rolled back: ' + result[1].length + ' migrations \n') + chalk.cyan(result[1].join('\n')));
+        });
+
+        success(messages.join('\n'));
       }).catch(exit);
     });
 
