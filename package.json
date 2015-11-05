@@ -33,6 +33,6 @@
     "tildify": "^1.1.2"
   },
   "peerDependencies": {
-    "knex": "^0.7.6"
+    "knex": ">=0.7.6"
   }
 }
