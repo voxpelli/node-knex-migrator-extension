@@ -1,6 +1,6 @@
 {
   "name": "knex-migrator-extension",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "An extension of the knex migration tool",
   "homepage": "http://github.com/voxpelli/node-knex-migrator-extension",
   "repository": {
