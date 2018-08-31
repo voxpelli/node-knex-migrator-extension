@@ -18,11 +18,6 @@
   "directories": {
     "lib": "./lib"
   },
-  "scripts": {
-    "test": "node -e \"require('grunt').tasks(['test']);\"",
-    "test-all": "node -e \"require('grunt').tasks(['test-all']);\"",
-    "prepush": "npm test"
-  },
   "dependencies": {
     "bluebird": "^3.0.5",
     "chalk": "^1.1.1",
