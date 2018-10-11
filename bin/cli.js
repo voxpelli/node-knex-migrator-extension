@@ -45,7 +45,8 @@ async function initKnexMigrate(env) {
   }
 
   var environmentVar = commander.env || process.env.NODE_ENV || 'development';
-  var config         = require(env.configPath)[environmentVar];
+  var config = await Promise.resolve(require(env.configPath))
+    .then(environments => environments[environmentVar]);
 
   process.env.NODE_ENV = environmentVar;
 
