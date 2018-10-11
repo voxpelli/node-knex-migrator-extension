@@ -141,7 +141,7 @@ async function invoke(env) {
     .command('migrate:make <name>')
     .description('       Create a named migration file.')
     .option('-x [' + filetypes.join('|') + ']', 'Specify the stub extension (default js)')
-    .action(async function(name) {
+    .action(name => {
       var ext = (argv.x || env.configPath.split('.').pop()).toLowerCase();
       pending = createMigration(env, name, ext);
     });
@@ -149,28 +149,28 @@ async function invoke(env) {
   commander
     .command('migrate:install')
     .description('        Install a fresh version of the schema.')
-    .action(async function() {
+    .action(() => {
       pending = freshInstall(env);
     });
 
   commander
     .command('migrate:latest')
     .description('        Run all migrations that have not yet been run.')
-    .action(async function() {
+    .action(() => {
       pending = migrateToLatest(env);
     });
 
   commander
     .command('migrate:rollback')
     .description('        Rollback the last set of migrations performed.')
-    .action(async function() {
+    .action(() => {
       pending = rollback(env);
     });
 
   commander
     .command('migrate:currentVersion')
     .description('       View the current version for the migration.')
-    .action(async function() {
+    .action(() => {
       pending = displayCurrentVersion(env);
     });
 
