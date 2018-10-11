@@ -77,7 +77,7 @@ function invoke(env) {
     .command('migrate:make <name>')
     .description('       Create a named migration file.')
     .option('-x [' + filetypes.join('|') + ']', 'Specify the stub extension (default js)')
-    .action(function(name) {
+    .action(async function(name) {
       var ext = (argv.x || env.configPath.split('.').pop()).toLowerCase();
       pending = await initKnexMigrate(env);
       pending = pending.make(name, {extension: ext}).then(function(name) {
