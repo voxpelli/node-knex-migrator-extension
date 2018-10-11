@@ -31,7 +31,7 @@ function checkLocalModule(env) {
   }
 }
 
-function initKnexMigrate(env) {
+async function initKnexMigrate(env) {
 
   checkLocalModule(env);
 
@@ -54,7 +54,7 @@ function initKnexMigrate(env) {
     process.exit(1);
   }
 
-  var knex = require(env.modulePath);
+  var knex = await require(env.modulePath);
   knex = knex(config);
   return require('../')(knex);
 }
@@ -79,7 +79,8 @@ function invoke(env) {
     .option('-x [' + filetypes.join('|') + ']', 'Specify the stub extension (default js)')
     .action(function(name) {
       var ext = (argv.x || env.configPath.split('.').pop()).toLowerCase();
-      pending = initKnexMigrate(env).make(name, {extension: ext}).then(function(name) {
+      pending = await initKnexMigrate(env);
+      pending = pending.make(name, {extension: ext}).then(function(name) {
         success(chalk.green('Created Migration: ' + name));
       }).catch(exit);
     });
@@ -87,8 +88,9 @@ function invoke(env) {
   commander
     .command('migrate:install')
     .description('        Install a fresh version of the schema.')
-    .action(function() {
-      pending = initKnexMigrate(env).install().then(function(results) {
+    .action(async function() {
+      pending = await initKnexMigrate(env);
+      pending = pending.install().then(function(results) {
         var messages = [];
 
         results.forEach(function (result) {
@@ -103,8 +105,9 @@ function invoke(env) {
   commander
     .command('migrate:latest')
     .description('        Run all migrations that have not yet been run.')
-    .action(function() {
-      pending = initKnexMigrate(env).latest().then(function(results) {
+    .action(async function() {
+      pending = await initKnexMigrate(env);
+      pending = pending.latest().then(function(results) {
         var messages = [];
 
         results.forEach(function (result) {
@@ -122,8 +125,9 @@ function invoke(env) {
   commander
     .command('migrate:rollback')
     .description('        Rollback the last set of migrations performed.')
-    .action(function() {
-      pending = initKnexMigrate(env).rollback().then(function(results) {
+    .action(async function() {
+      pending = await initKnexMigrate(env);
+      pending = pending.rollback().then(function(results) {
         var messages = [];
 
         results.forEach(function (result) {
@@ -142,8 +146,9 @@ function invoke(env) {
   commander
     .command('migrate:currentVersion')
     .description('       View the current version for the migration.')
-    .action(function () {
-      pending = initKnexMigrate(env).currentVersion().then(function(version) {
+    .action(async function () {
+      pending = await initKnexMigrate(env);
+      pending = pending.currentVersion().then(function(version) {
         success(chalk.green('Current Version: ') + chalk.blue(version));
       }).catch(exit);
     });
