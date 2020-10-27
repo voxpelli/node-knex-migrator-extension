@@ -31,6 +31,6 @@
     "knex": ">=0.7.6"
   },
   "devDependencies": {
-    "knex": "^0.15.2"
+    "knex": "^0.21.8"
   }
 }
