@@ -23,7 +23,7 @@
     "chalk": "^1.1.1",
     "commander": "^2.9.0",
     "interpret": "^0.6.6",
-    "liftoff": "^2.2.0",
+    "liftoff": "^4.0.0",
     "minimist": "^1.2.0",
     "tildify": "^1.1.2"
   },
