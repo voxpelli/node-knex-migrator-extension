@@ -1,5 +1,7 @@
 # node-knex-migrator-extension
 
+**DEPRECATED:** Use [`umzeption`](https://github.com/voxpelli/umzeption) instead, the successor to this module
+
 An extension of the knex migrator. Initial version based on knex 0.7, still works on knex 0.12
 
 Started out based on some PR:s to knex itself:
